@@ -2,24 +2,31 @@
 <html>
 <head>
   <title>Be My Valentine?</title>
+
+  <!-- Makes it responsive on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       background-color: #ffe6f0;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       font-family: Arial, sans-serif;
       text-align: center;
+      margin: 0;
+      padding: 20px;
       overflow: hidden;
     }
 
     .card {
       background: white;
-      padding: 40px;
+      padding: 30px;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      width: 350px;
+      width: 90%;
+      max-width: 350px;
       position: relative;
     }
 
@@ -28,14 +35,14 @@
     }
 
     h1 {
-      font-size: 22px;
+      font-size: clamp(18px, 5vw, 24px);
       margin: 20px 0;
     }
 
     button {
-      padding: 10px 25px;
+      padding: 12px 25px;
       border: none;
-      border-radius: 20px;
+      border-radius: 25px;
       font-size: 16px;
       cursor: pointer;
       margin: 10px;
@@ -47,20 +54,20 @@
       color: white;
     }
 
-    #yesBtn:hover {
+    #yesBtn:active {
       transform: scale(1.1);
     }
 
     #noBtn {
       background-color: #ddd;
       color: black;
-      position: absolute;
+      position: relative;
     }
 
     #celebration {
       display: none;
       margin-top: 20px;
-      font-size: 24px;
+      font-size: 26px;
       color: #ff4d88;
       font-weight: bold;
     }
@@ -69,7 +76,6 @@
       position: fixed;
       width: 10px;
       height: 10px;
-      background-color: red;
       top: 0;
       animation: fall 3s linear infinite;
     }
@@ -99,23 +105,24 @@
   const noBtn = document.getElementById("noBtn");
   const celebration = document.getElementById("celebration");
 
-  // Yes button effect
+  // YES BUTTON
   yesBtn.addEventListener("click", function() {
     celebration.style.display = "block";
     createConfetti();
   });
 
-  // Make No button run away
-  noBtn.addEventListener("mouseover", function() {
-    const x = Math.random() * window.innerWidth - 100;
-    const y = Math.random() * window.innerHeight - 50;
+  // NO BUTTON runs away on click (works on phones)
+  noBtn.addEventListener("click", function() {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.position = "fixed";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
   });
 
   // Confetti effect
   function createConfetti() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 60; i++) {
       const confetti = document.createElement("div");
       confetti.classList.add("confetti");
       confetti.style.left = Math.random() * window.innerWidth + "px";
