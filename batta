@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Be My Valentine?</title>
+
+  <!-- Makes it responsive on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      background-color: #ffe6f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 350px;
+      position: relative;
+    }
+
+    .duck {
+      font-size: 60px;
+    }
+
+    h1 {
+      font-size: clamp(18px, 5vw, 24px);
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background-color: #ff4d88;
+      color: white;
+    }
+
+    #yesBtn:active {
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      background-color: #ddd;
+      color: black;
+      position: relative;
+    }
+
+    #celebration {
+      display: none;
+      margin-top: 20px;
+      font-size: 26px;
+      color: #ff4d88;
+      font-weight: bold;
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: 0;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <div class="duck">🦆💗</div>
+    <h1>Batta will you be my valentine?</h1>
+
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+
+    <div id="celebration">YAAAY!!! 🎉💖</div>
+  </div>
+
+<script>
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const celebration = document.getElementById("celebration");
+
+  // YES BUTTON
+  yesBtn.addEventListener("click", function() {
+    celebration.style.display = "block";
+    createConfetti();
+  });
+
+  // NO BUTTON runs away on click (works on phones)
+  noBtn.addEventListener("click", function() {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+
+  // Confetti effect
+  function createConfetti() {
+    for (let i = 0; i < 60; i++) {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.backgroundColor =
+        ["#ff4d88", "#ffcc00", "#66ffcc", "#6699ff"][Math.floor(Math.random() * 4)];
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(confetti);
+
+      setTimeout(() => confetti.remove(), 5000);
+    }
+  }
+</script>
+
+</body>
+</html>
